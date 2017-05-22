@@ -38,42 +38,10 @@ namespace Quitr2.Controllers
                         return RedirectToAction("Setup", "User");
                     }
 
-                    //påbörja achivements
                     var days = DateTime.UtcNow.Subtract(result.stopDate ?? DateTime.UtcNow).TotalDays;
-
-                    if (days > 1)
-                    {
-                        if (days > 365)
-                        {
-
-                        }
-                        else if (days > 182)
-                        {
-
-                        }
-                        else if (days > 100)
-                        {
-
-                        }
-                        else if (days > 31)
-                        {
-
-                        }
-                        else if (days > 7)
-                        {
-
-                        }
-                        else
-                        {
-
-                        }
-                    }
-                    //achivements slut
-
                     var addtype = (from a in db.addictiontypes
                                    where a.Id == result.addictiontype
                                    select new { a.Name }).FirstOrDefault();
-
 
                     model.stopDate = result.stopDate ?? DateTime.UtcNow;
                     model.cost = result.cost;
@@ -83,11 +51,9 @@ namespace Quitr2.Controllers
                     model.userprefId = result.Id;
                     model.counterDeleted = result.Deleted ?? true;
 
-                    
                     int daysConverted = Convert.ToInt32(days);
                     int totalUnits = daysConverted * result.units ?? 0;
-
-
+                    
                     var ContentsQuery = (from g in db.productcontents
                                          join p1 in db.productcontenttypes on g.productcontenttypeId equals p1.Id into p2
                                          from p in p2.DefaultIfEmpty()
@@ -144,7 +110,7 @@ namespace Quitr2.Controllers
 
                         if (substitute != null)
                         {
-                            var badamount = (substitute.today_amount / nicPerDayQuery.nic_per_day);
+                            var badamount = ((substitute.today_amount / 1000)/ nicPerDayQuery.nic_per_day);
 
                             if (badamount.Value > 0.3M)
                             { model.substituteMood = "#ecaa93"; }
@@ -164,8 +130,42 @@ namespace Quitr2.Controllers
                             model.substituteMood = "#93ecaa";
                             model.substituteDayAmount = 0;
                         }
+
+                        //get achivements
+                        var achivementsresult = (from ua in db.userachivements
+                                                 join a1 in db.achivements on ua.achivementid equals a1.level into a2
+                                                 from a in a2.DefaultIfEmpty()
+                                                 where ua.userprefid == result.Id && ua.deleted == false && a.type == ua.achivementtype
+                                                 orderby a.level ascending
+                                                 select new { a.icon, a.level, a.color, a.description });
+
+                        model.Achivements.AddRange(
+                            achivementsresult.ToList().Select(
+                                x =>
+                                new AchivementsModel()
+                                {
+                                    icon = x.icon,
+                                    color = x.color,
+                                    description = x.description,
+                                    level = x.level
+                                }));
+
+                        model.ProductContents.AddRange(
+                       ContentsQuery.ToList().Select(
+                           x =>
+                           new ProductContentsModel()
+                           {
+                               Amount = x.Amount ?? 0,
+                               Unit = x.Unit,
+                               ContentName = x.Name
+                           }));
+
+
                     }
                 }
+
+                
+
             }
             return View(model);
         }

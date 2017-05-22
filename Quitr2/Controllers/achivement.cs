@@ -27,6 +27,7 @@ namespace Quitr2.Controllers
         public string icon { get; set; }
         public string color { get; set; }
         public Nullable<int> type { get; set; }
+        public Nullable<int> level { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<userachivement> userachivements { get; set; }

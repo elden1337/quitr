@@ -15,6 +15,7 @@ namespace Quitr2.Models.User
             Deviations = new List<DeviationsModel>();
             ProductContents = new List<ProductContentsModel>();
             Substitute = new List<SubstituteModel>();
+            Achivements = new List<AchivementsModel>();
 
         }
 
@@ -40,7 +41,18 @@ namespace Quitr2.Models.User
         public List<ProductContentsModel> ProductContents { get; set; }
         public List<UserDeletedCountersModel> UserCounters { get; set; }
         public List<SubstituteModel> Substitute { get; set; }
+        public List<AchivementsModel> Achivements { get; set; }
     }
+
+    public class AchivementsModel
+    {
+        public string icon { get; set; }
+        public string color { get; set; }
+        public int? level { get; set; }
+        public string description { get; set; }
+    }
+
+
 
     public class SubstituteModel
     {

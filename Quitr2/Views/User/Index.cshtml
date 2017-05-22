@@ -45,7 +45,7 @@ setInterval( function(){
     document.getElementById("minutes").innerHTML=pad(parseInt(sec/60%60));
     document.getElementById("hours").innerHTML=pad(parseInt(sec/3600%24));
     document.getElementById("days").innerHTML=pad(parseInt(sec/86400));
-    document.getElementById("lifedays").innerHTML = pad(parseInt(sec * 0.00000131524));
+    //document.getElementById("lifedays").innerHTML = pad(parseInt(sec * 0.00000131524));
 	document.getElementById("earnings").innerHTML=(((@Model.cost)/86400*sec).toFixed(0));
 
      @for (int n = 0; n < Model.ProductContents.Count; n++)
@@ -69,22 +69,24 @@ document.getElementById("unitsperday").innerHTML=(((@Model.units)/86400*sec).toF
             <label id="days">0</label>&nbsp;days<br /><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label><br>
             <div class="lifelife" style="display:flex; justify-content:center;">
                 @*level <label id="lifedays">0</label>*@
-                <i class="material-icons">stars</i>
-                <i class="material-icons">monetization_on</i>
-                <i class="material-icons">brightness_1</i>
-                <i class="material-icons">filter_vintage</i>
-                <i class="material-icons">local_florist</i>
-                <i class="material-icons">cake</i>
 
-                <i class="material-icons">mood</i>
-                <i class="material-icons">mood_bad</i>
-
-                <div id="tt4" class="icon material-icons" style="color:#cd7f32;">monetization_on</div>
-                <div class="mdl-tooltip" for="tt4">
-                    Your savings are stacking up! Treat yourself to something nice.
+                @for (int n = 0; n < Model.Achivements.Count; n++)
+                {
+                <div id="@Model.Achivements[n].level@Model.Achivements[n].icon " class="icon material-icons" style="font-size:36px; margin-top:-10px; color:@Model.Achivements[n].color;">@Model.Achivements[n].icon</div>
+                <div class="mdl-tooltip" for="@Model.Achivements[n].level@Model.Achivements[n].icon">
+                @Model.Achivements[n].description
                 </div>
+                }
 
-                <i class="material-icons">share</i>
+                @*<i class="material-icons">monetization_on</i>
+        <i class="material-icons">brightness_1</i>
+        <i class="material-icons">filter_vintage</i>
+        <i class="material-icons">local_florist</i>
+        <i class="material-icons">cake</i>
+        <i class="material-icons">mood</i>
+        <i class="material-icons">mood_bad</i>
+        <i class="material-icons">share</i>*@
+
             </div>
         </div>
 

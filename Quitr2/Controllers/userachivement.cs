@@ -19,6 +19,7 @@ namespace Quitr2.Controllers
         public int achivementid { get; set; }
         public System.DateTime TS { get; set; }
         public Nullable<bool> deleted { get; set; }
+        public Nullable<int> achivementtype { get; set; }
     
         public virtual achivement achivement { get; set; }
         public virtual userpref userpref { get; set; }
