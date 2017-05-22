@@ -1,31 +1,61 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model Quitr2.Models.Home.HomeModel
+
+@{
+    ViewBag.Title = "Quitr";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@*<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8788494757785541",
+    enable_page_level_ads: true
+  });
+</script>*@
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<div class="placeholder">
+
+    
+
+    
+    <div class="flexbox">
+        <center>
+            <div class="frontpage-logo">
+                <t style="color:#e8997d; font-size:105px; z-index:-1; margin-right:-8px; padding-top:2px;">Q</t>uitr.net
+            </div>
+  <br />
+            <div class="frontpage-logo-byline">Currently helping @Model.totalCounters persons quit their habits!</div>
+        
+        </center>
+        <br />
+
+        <hr />
+
+        <div class="article">
+            <p>
+                <b>2017-05-06</b><br />
+                Like-button added to the shared pages to gather feedback from people who view your quitr.<br />
+                Minor bug-fixes with setup.
+            </p>
+            <p>
+                <b>2017-05-04</b><br />
+                The nicotine-substitute setting has been released. It can currently be used to store your substitute-intake each day. We'll use the stored data to produce graphs for you in the coming weeks.<br />
+            </p>
+         
+        </div>
+
+
+
+        <div class="frontpage-hashtags">#quitr #beaquitr</div>
+
+
+        @*@Html.RenderPartial(MVC.Account.Views.Login)
+        @Html.RenderPartial()*@
+
+
+        
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+
+
+
 </div>

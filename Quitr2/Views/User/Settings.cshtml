@@ -1,0 +1,157 @@
+﻿
+@model Quitr2.Models.User.UserModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Quitr.net";
+}
+
+
+
+<div class="placeholder">
+
+
+    <div class="flexbox">
+        <div class="article">
+            <div class="user--username">@User.Identity.Name</div>
+            <br />
+
+
+
+            @if (Model.userprefId > 0)
+            {
+
+
+
+                <div class="user--counter-row">
+                    <div class="user--counter-cell">Type</div>
+                    <div class="user--counter-cell">Quitr-date</div>
+                    <div class="user--counter-cell">Length</div>
+                    <div class="user--counter-cell">Units per day</div>
+                    <div class="user--counter-cell">Cost per day (SEK)</div>
+                    <div class="user--counter-cell">Producttype</div>
+                    <div class="user--counter-cell">Using substitute nicotine</div>
+                    <div class="user--counter-cell">Nicotine per unit (mg)</div>
+                    <div class="user--counter-cell">3</div>
+                </div>
+                <div class="user--counter-row">
+
+                    @*TODO, hämta typnamn från databasen istället.*@
+
+                    @if (Model.addictionType == 1)
+                    {
+                        <div class="user--counter-cell">Snus</div>
+                    }
+                    else if (Model.addictionType == 2)
+                    {
+                        <div class="user--counter-cell">Cigarettes</div>
+                    }
+
+
+                    <div class="user--counter-cell">@Model.stopDate.ToLongDateString()</div>
+                    <div class="user--counter-cell">@((DateTime.UtcNow - Model.stopDate).Days) days</div>
+                    <div class="user--counter-cell">@Model.units</div>
+                    <div class="user--counter-cell">@Model.cost</div>
+                    <div class="user--counter-cell">@Model.addictionProductType</div>
+
+                    @using (Html.BeginForm("Settings", "User", FormMethod.Post))
+                    {
+                        <div class="user--counter-cell">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="@Html.IdFor(model => model.isUsingSubstitute)">
+                                @Html.CheckBoxFor(model => model.isUsingSubstitute, new { @class = "mdl-checkbox__input" })
+                            </label>
+                        </div>
+                        <div class="user--counter-cell">
+                            @Html.TextBoxFor(model => Model.Substituteamount, new { @class = "short-input" })
+                        </div>
+                        <div class="user--counter-cell">
+                            <button type="submit" name="updateSettings" id="settings_save" class="stopcounter-button" @*class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"*@>
+                            <i class="material-icons" style="font-size:18px;">save</i><br />Save changes</button>
+                        </div>
+                        <div class="user--counter-cell">
+                            @Html.HiddenFor(model => model.userprefId)
+                            <button class="stopcounter-button" name="stopCounter" type="submit" onclick="return confirm('This will delete and reset your Quitr. Do you really want to proceed?')">
+                                <i class="material-icons" style="font-size:18px;">cancel</i><br />Stop counter
+                            </button>
+
+                        </div>
+                    }
+
+
+                </div>
+
+                if (Model.sharing == true)
+                {
+                    <div class="user--sharelink-placeholder">
+                        <div class="user--sharelink-description">This is your sharelink. Use it to show your progress to the outside world (viewers cannot edit your Quitr).</div>
+                        <div class="user--sharelink">
+                            http://quitr.net/User/Share?UserId=@User.Identity.GetUserId()
+                        </div>
+                    </div>
+                }
+
+
+            }
+            <table class="mdl-data-table mdl-js-data-table">
+
+                <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Type</th>
+
+                        <th>Units per day</th>
+                        <th>Cost per day (SEK)</th>
+                        <th class="mdl-data-table__cell--non-numeric mdl-data-table__header--sorted-descending">Quitr-date</th>
+                        <th class="mdl-data-table__cell--non-numeric">Deleted-date</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int n = 0; n < Model.UserCounters.Count; n++)
+                    {
+                        <tr>
+
+
+                            @if (Model.UserCounters[n].addictionType == 1)
+                            {
+                                <td class="mdl-data-table__cell--non-numeric">Snus</td>
+                            }
+                            else if (Model.UserCounters[n].addictionType == 2)
+                            {
+                                <td class="mdl-data-table__cell--non-numeric">Cigarettes</td>
+                            }
+
+
+                            <td>@Model.UserCounters[n].units</td>
+                            <td>@Model.UserCounters[n].cost</td>
+                            <td class="mdl-data-table__cell--non-numeric">@Model.UserCounters[n].stopDate.ToLongDateString()</td>
+                            @if (Model.UserCounters[n].deletedDate.HasValue)
+                            {
+                                <td class="mdl-data-table__cell--non-numeric">@Model.UserCounters[n].deletedDate</td>
+
+                            }
+                            else
+                            {
+                                <td class="mdl-data-table__cell--non-numeric"></td>
+                            }
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#isUsingSubstitute').click(function () {
+            if ($(this).is(':checked')) {
+                $('#Substituteamount').removeAttr('disabled');
+            } else {
+                $('#Substituteamount').attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>

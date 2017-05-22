@@ -3,42 +3,81 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="robots" content="index,nofollow" />
+    <meta name="keywords" content="snus, quit, quitter, quitr, stop smoking, stop using dip, sluta snusa, sluta röka, bli sockerfri, sluta med socker" />
+    <meta name="description" content="Quitr.net" />
+    @RenderSection("metatags", false)
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" defer/>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-teal.min.css" defer/>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="~/Content/img/favicon/" />
+
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="~/Content/img/favicon/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/img/favicon/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/img/favicon/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/img/favicon/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="~/Content/img/favicon/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="~/Content/img/favicon/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="~/Content/img/favicon/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="~/Content/img/favicon/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="~/Content/img/favicon/favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="~/Content/img/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="~/Content/img/favicon/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="~/Content/img/favicon/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="~/Content/img/favicon/favicon-128.png" sizes="128x128" />
+<meta name="application-name" content="&nbsp;"/>
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="~/Content/img/favicon/mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="~/Content/img/favicon/mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="~/Content/img/favicon/mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="~/Content/img/favicon/mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="~/Content/img/favicon/mstile-310x310.png" />
+
+
+    <title>@ViewBag.Title - Quitr</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88216123-2', 'auto');
+  ga('send', 'pageview');
+
+    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+ 
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <header>
+        <div class="logobox">
+            <div class="logoitem">
+                @Html.ActionLink(" ", "Index", "Home")
+                <t style="color:#e8997d; font-size:30px; z-index:-1; margin-right:-4px; padding-top:2px;">Q</t>uitr.net
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+        </div> 
+            <div class="menubox">
+                
                 @Html.Partial("_LoginPartial")
+                
             </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </header>
+    <div class="bodywrapper">
+        @RenderBody()  
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    </div>
     @RenderSection("scripts", required: false)
 </body>
 </html>

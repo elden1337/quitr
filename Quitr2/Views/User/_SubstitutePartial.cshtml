@@ -1,0 +1,24 @@
+﻿@model Quitr2.Models.User.UserModel
+
+<div id="divSubstitute">
+
+    @using (Ajax.BeginForm("addMg", "User", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divSubstitute" }))
+            {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" value="@Model.substituteId" name="substituteId" />
+        <input type="hidden" value="@Model.userprefId" name="user" />
+
+        <button id="addmg" type="submit" class="mdl-button mdl-js-button mdl-button--fab moods" style="background:@Model.substituteMood;" value="substitute" name="moodbutton">
+            <span style="font-size:16px; position:absolute; z-index:10; top:14px; left:0; width:56px; font-family:'Raleway',sans-serif; font-weight:700;">@Model.substituteDayAmount
+                </span>
+            <span style="text-transform:lowercase; color:#Fff; opacity:0.8; z-index:9; font-size:16px; width:56px; left:0; position:absolute; top:25px;">mg</span>
+        </button>
+
+
+    }
+
+
+
+</div>
+

@@ -21,7 +21,7 @@ namespace Quitr2.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("loginConnection", throwIfV1Schema: false)
         {
         }
 

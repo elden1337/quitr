@@ -1,0 +1,39 @@
+﻿
+<div id="divMood">
+
+    <div class="mood-title">How do you feel right now?</div><br />
+
+    @using (Ajax.BeginForm("Index", "User", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divMood" }))
+            {
+
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" value="@Model.userprefId" name="userprefid" />
+        <input type="hidden" value="@Model.substituteId" name="substituteId" />
+
+        <button id="minustwo" class="mdl-button mdl-js-button mdl-button--fab moods" style="background:#ecaa93;" value="minustwo" name="moodbutton">
+            <i class="material-icons">sentiment_very_dissatisfied</i>
+        </button>
+                <div class="mood-spacer">&nbsp;</div>
+                <button id="minusone" class="mdl-button mdl-js-button mdl-button--fab moods" style="background:#f3c8b9" value="minusone" name="moodbutton">
+                    <i class="material-icons">sentiment_dissatisfied</i>
+                </button>
+                <div class="mood-spacer">&nbsp;</div>
+                <button id="zero" class="mdl-button mdl-js-button mdl-button--fab moods" style="background:#faf5e5" value="zero" name="moodbutton">
+                    <i class="material-icons">sentiment_neutral</i>
+                </button>
+                <div class="mood-spacer">&nbsp;</div>
+                <button id="plusone" class="mdl-button mdl-js-button mdl-button--fab moods" style="background:#b9f3c8" value="plusone" name="moodbutton">
+                    <i class="material-icons">sentiment_satisfied</i>
+                </button>
+                <div class="mood-spacer">&nbsp;</div>
+                <button id="plustwo" class="mdl-button mdl-js-button mdl-button--fab moods" style="background:#93ecaa" value="plustwo" name="moodbutton">
+                    <i class="material-icons">sentiment_very_satisfied</i>
+                </button>
+    }
+ 
+
+</div>
+
+
+

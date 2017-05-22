@@ -1,0 +1,67 @@
+﻿@model Quitr2.Models.Admin.AdminModel
+
+@{
+    ViewBag.Title = "Motivatorn";
+}
+
+
+
+<div class="placeholder">
+
+
+    <br /><br /><br /><br />
+
+
+    <div style="background-color:white; color:#000; padding:10px; font-size:14px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; ">
+        @for (int n = 0; n < Model.Types.Count; n++)
+            {
+            <span>@Model.Types[n].Id</span> <span>@Model.Types[n].TypeName</span><br />
+
+        }
+    </div>
+    <br /><br />
+    <div style="background-color:white; color:#000; padding:10px; font-size:14px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; ">
+        @for (int n = 0; n < Model.Products.Count; n++)
+            {
+            <span>@Model.Products[n].Id</span> <span>@Model.Products[n].ProductName</span><br />
+        }
+    </div>
+
+    <br />
+
+    @Html.BeginForm("Index", "Admin", FormMethod.Post)
+    {
+    <br />
+    @Html.RadioButtonFor(model => Model.TypeId, "1")
+    @Html.LabelFor(model => Model.TypeId, "Snus")
+    <br />
+    @Html.RadioButtonFor(model => Model.TypeId, "2")
+    @Html.LabelFor(model => Model.TypeId, "Cigaretter")
+    <br /><br />
+
+    <div>
+        @Html.TextBoxFor(model => Model.ProductName)
+        @Html.LabelFor(model => Model.ProductName, "Produktnamn")
+    </div>
+    <br /><br />
+    <div>
+        @Html.TextBoxFor(model => Model.ContentName, new { placeholder = "Nikotin, Bly etc" })
+        @Html.LabelFor(model => Model.ContentName, "Gift-typ")
+    </div>
+    <div>
+        @Html.TextBoxFor(model => Model.ContentAmount)
+        @Html.LabelFor(model => Model.ContentAmount, "Gift-mängd")
+    </div>
+    <div>
+        @Html.TextBoxFor(model => Model.ContentUnit, new { placeholder = "mg, g, µg" })
+        @Html.LabelFor(model => Model.ContentUnit, "Gift-enhet")
+    </div>
+
+    <button type="submit">Lägg till</button>
+
+    }
+
+
+
+
+</div>

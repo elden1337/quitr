@@ -1,0 +1,168 @@
+﻿@model Quitr2.Models.User.UserModel
+
+@{
+    ViewBag.Title = "Usercounter";
+}
+
+@using System.Globalization;
+
+@{
+    DateTime convertedStopDate = Model.stopDate.ToLocalTime();
+
+    var addictionText = "";
+
+    //TODO: remove hardcoded
+    if (Model.addictionType == 1)
+    {
+        addictionText = "snus";
+    }
+    else if (Model.addictionType == 2)
+    {
+        addictionText = "cigarettes";
+    }
+}
+
+@section metatags {
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Quitr.net - stop your bad habits" />
+    <meta property="og:description" content="Follow me on my journey to become free from @addictionText" />
+    @*<meta property="fb:app_id" content=""*@
+}
+
+
+<script type="text/javascript">
+
+var now = new Date();
+var stopDate = new Date(@convertedStopDate.Year, @convertedStopDate.Month-1, @convertedStopDate.Day, @convertedStopDate.Hour, @convertedStopDate.Minute, @convertedStopDate.Second);
+var sec = parseInt((now-stopDate)/1000);
+
+function pad ( val ) { return val > 9 ? val : "0" + val; }
+setInterval( function(){
+    document.getElementById("seconds").innerHTML=pad(++sec%60);
+    document.getElementById("minutes").innerHTML=pad(parseInt(sec/60%60));
+    document.getElementById("hours").innerHTML=pad(parseInt(sec/3600%24));
+    document.getElementById("days").innerHTML=pad(parseInt(sec/86400));
+
+    document.getElementById("lifedays").innerHTML = pad(parseInt(sec * 0.00000131524));
+
+	document.getElementById("earnings").innerHTML=(((@Model.cost)/86400*sec).toFixed(0));
+
+     @for (int n = 0; n < Model.ProductContents.Count; n++)
+     {
+
+
+         <text>document.getElementById("@Model.ProductContents[n].ContentName").innerHTML = ("@Model.ProductContents[n].ContentName" + ": " + ((@Model.ProductContents[n].Amount*@Model.units/86400)*sec).toFixed(4) + " @Model.ProductContents[n].Unit");</text>
+        }
+
+                  //TODO: remove hardcoded
+@if (Model.addictionType == 1)
+{
+<text>document.getElementById("unitsperday").innerHTML=(((@Model.units)/86400*sec).toFixed(0)+" snus portions");</text>
+}
+else if (Model.addictionType == 2)
+{
+<text>document.getElementById("unitsperday").innerHTML=(((@Model.units)/86400*sec).toFixed(0)+" cigarettes");</text>
+}
+
+
+}, 1000)
+</script>
+
+<div class="placeholder">
+
+    <div class="flexbox">
+        <div class="counter">
+            <label id="days">0</label>&nbsp;days<br /><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label><br>
+            <span class="lifelife">
+                level <label id="lifedays">0</label>
+            </span>
+        </div>
+
+        <div class="earnings">
+            <label id="earnings"></label>&nbsp;kr<br>
+            <label id="unitsperday"></label>
+        </div>
+
+        <div class="mg">
+            @for (int n = 0; n < Model.ProductContents.Count; n++)
+            {
+                <label id="@Model.ProductContents[n].ContentName"></label><br />
+
+            }
+
+        </div>
+    </div>
+
+
+
+    <div class="moodbox">
+        <div class="fb-comments" data-href="http://quitr.net/User/Share?UserId=@Model.userId" data-numposts="5"></div>
+    </div>
+
+</div>
+
+
+@if (Model.currentMood.HasValue)
+{
+    <div class="moodsharebox">
+
+        @*<span style="color:#f3f9fb;">Current mood</span><br /><br />*@
+
+
+        @if (Model.currentMood == -2)
+        {
+            <button class="mdl-button mdl-js-button mdl-button--fab" style="background:#ecaa93;" value="minustwo" disabled>
+                <i class="material-icons">sentiment_very_dissatisfied</i>
+            </button>
+        }
+        else if (Model.currentMood == -1)
+        {
+
+            <button class="mdl-button mdl-js-button mdl-button--fab" style="background:#f3c8b9" value="minusone" disabled>
+                <i class="material-icons">sentiment_dissatisfied</i>
+            </button>
+        }
+        else if (Model.currentMood == 0)
+        {
+            <button class="mdl-button mdl-js-button mdl-button--fab" style="background:#faf5e5" value="zero" disabled>
+                <i class="material-icons">sentiment_neutral</i>
+            </button>
+        }
+        else if (Model.currentMood == 1)
+        {
+            <button class="mdl-button mdl-js-button mdl-button--fab" style="background:#b9f3c8" value="plusone" disabled>
+                <i class="material-icons">sentiment_satisfied</i>
+            </button>
+        }
+        else if (Model.currentMood == 2)
+        {
+            <button class="mdl-button mdl-js-button mdl-button--fab" style="background:#93ecaa" value="plustwo" disabled>
+                <i class="material-icons">sentiment_very_satisfied</i>
+            </button>
+        }
+    </div>
+}
+else
+{
+    <span>&nbsp;</span>
+}
+
+
+
+<div id="fb-root"></div>
+<script>
+(function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1824208464500968";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+<div class="fb-like-placeholder">
+    <div class="fb-like" data-href="http://quitr.net/User/Share?UserId=@Model.userId" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>
+    </div>

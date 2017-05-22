@@ -1,0 +1,210 @@
+﻿@model Quitr2.Models.User.UserModel
+@using System.Globalization;
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "My counter";
+    var addictionText = "";
+
+    //TODO: remove hardcoded
+    if (Model.addictionType == 1)
+    {
+        addictionText = "snus";
+    }
+    else if (Model.addictionType == 2)
+    {
+        addictionText = "cigarettes";
+    }
+}
+
+@{
+    DateTime convertedStopDate = Model.stopDate.ToLocalTime();
+}
+
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1824208464500968";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+<script type="text/javascript">
+
+var now = new Date();
+var stopDate = new Date(@convertedStopDate.Year, @convertedStopDate.Month-1, @convertedStopDate.Day, @convertedStopDate.Hour, @convertedStopDate.Minute, @convertedStopDate.Second);
+var sec = parseInt((now-stopDate)/1000);
+
+function pad ( val ) { return val > 9 ? val : "0" + val; }
+setInterval( function(){
+    document.getElementById("seconds").innerHTML=pad(++sec%60);
+    document.getElementById("minutes").innerHTML=pad(parseInt(sec/60%60));
+    document.getElementById("hours").innerHTML=pad(parseInt(sec/3600%24));
+    document.getElementById("days").innerHTML=pad(parseInt(sec/86400));
+    document.getElementById("lifedays").innerHTML = pad(parseInt(sec * 0.00000131524));
+	document.getElementById("earnings").innerHTML=(((@Model.cost)/86400*sec).toFixed(0));
+
+     @for (int n = 0; n < Model.ProductContents.Count; n++)
+     {
+         <text>document.getElementById("@Model.ProductContents[n].ContentName").innerHTML = ("@Model.ProductContents[n].ContentName" + ": " + ((@Model.ProductContents[n].Amount*@Model.units/86400)*sec).toFixed(2) + " @Model.ProductContents[n].Unit");</text>
+        }
+
+      
+document.getElementById("unitsperday").innerHTML=(((@Model.units)/86400*sec).toFixed(0)+" " + "@Model.addictionTypeName");
+
+
+}, 1000)
+</script>
+
+<div class="placeholder">
+
+
+
+    <div class="flexbox">
+        <div class="counter">
+            <label id="days">0</label>&nbsp;days<br /><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label><br>
+            <div class="lifelife" style="display:flex; justify-content:center;">
+                @*level <label id="lifedays">0</label>*@
+                <i class="material-icons">stars</i>
+                <i class="material-icons">monetization_on</i>
+                <i class="material-icons">brightness_1</i>
+                <i class="material-icons">filter_vintage</i>
+                <i class="material-icons">local_florist</i>
+                <i class="material-icons">cake</i>
+
+                <i class="material-icons">mood</i>
+                <i class="material-icons">mood_bad</i>
+
+                <div id="tt4" class="icon material-icons" style="color:#cd7f32;">monetization_on</div>
+                <div class="mdl-tooltip" for="tt4">
+                    Your savings are stacking up! Treat yourself to something nice.
+                </div>
+
+                <i class="material-icons">share</i>
+            </div>
+        </div>
+
+        <div class="earnings">
+            <label id="earnings"></label>&nbsp;kr<br>
+            <label id="unitsperday"></label>
+        </div>
+
+        <div class="mg">
+            @for (int n = 0; n < Model.ProductContents.Count; n++)
+            {
+                <label id="@Model.ProductContents[n].ContentName"></label><br />
+
+            }
+
+        </div>
+    </div>
+
+    @if (Model.isUsingSubstitute)
+    {
+        <div class="substitutebox">
+            @Html.Partial("_SubstitutePartial", Model)
+        </div>
+    }
+
+    <div class="moodbox">
+        @Html.Partial("_MoodPartial", Model)
+
+    </div>
+
+
+    <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
+    <script>
+            (function () {
+                'use strict';
+                var snackbarContainer = document.querySelector('#demo-toast-example');
+                var showToastButton = document.querySelector('#addmg');
+                showToastButton.addEventListener('click', function () {
+                    'use strict';
+                    var data = { message: 'Your substitute has been stored' };
+                    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                });
+
+            }());
+    </script>
+
+    <script>
+        (function () {
+            'use strict';
+            var snackbarContainer = document.querySelector('#demo-toast-example');
+            var showToastButton = document.querySelector('#minustwo');
+            showToastButton.addEventListener('click', function () {
+                'use strict';
+                var data = { message: 'Your mood has been stored. Hope you will feel better soon' };
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
+            });
+        }());
+    </script>
+
+    <script>
+        (function () {
+            'use strict';
+            var snackbarContainer = document.querySelector('#demo-toast-example');
+            var showToastButton = document.querySelector('#minusone');
+            showToastButton.addEventListener('click', function () {
+                'use strict';
+                var data = { message: 'Your mood has been stored' };
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
+            });
+        }());
+    </script>
+
+    <script>
+        (function () {
+            'use strict';
+            var snackbarContainer = document.querySelector('#demo-toast-example');
+            var showToastButton = document.querySelector('#zero');
+            showToastButton.addEventListener('click', function () {
+                'use strict';
+                var data = { message: 'Your mood has been stored' };
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
+            });
+        }());
+    </script>
+
+    <script>
+        (function () {
+            'use strict';
+            var snackbarContainer = document.querySelector('#demo-toast-example');
+            var showToastButton = document.querySelector('#plusone');
+            showToastButton.addEventListener('click', function () {
+                'use strict';
+                var data = { message: 'Your mood has been stored' };
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
+            });
+        }());
+    </script>
+    <script>
+        (function () {
+            'use strict';
+
+            var snackbarContainer = document.querySelector('#demo-toast-example');
+            var showToastButton = document.querySelector('#plustwo');
+            showToastButton.addEventListener('click', function () {
+                'use strict';
+                var data = { message: 'Your mood has been stored. Glad that you feel good!' };
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                document.getElementById("plustwo").reset();
+            });
+        }());
+    </script>
+
+    <div class="fb-button-placeholder">
+        <div class="fb-share-button" data-href="http://quitr.net/User/Share?UserId=@User.Identity.GetUserId()" data-layout="button" data-size="large" data-mobile-iframe="true">
+            <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fquitr.net%2FUser%2FShare&#063UserId=@User.Identity.GetUserId();&amp;src=sdkpreparse">Share on Facebook</a>
+        </div>
+    </div>
+
+</div>

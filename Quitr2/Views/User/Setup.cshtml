@@ -1,0 +1,103 @@
+﻿@model Quitr2.Models.User.SetupModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Setup your quitr";
+}
+
+
+
+<div class="article">
+
+
+    @using (Html.BeginForm("Setup", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <p style="font-size:16px;">Pick your poison:</p>
+           
+        @for (int n = 0; n < Model.AddicitionTypes.Count; n++)
+        {
+            
+
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-@Model.AddicitionTypes[n].Id">
+                <input type="radio" id="option-@Model.AddicitionTypes[n].Id" class="mdl-radio__button" name="@Html.IdFor(model => Model.AddictionType)" value="@Model.AddicitionTypes[n].Id">
+                <span class="mdl-radio__label">@Model.AddicitionTypes[n].Name</span>
+            </label>
+
+                <br />
+        }
+ 
+        </div>
+
+@*<select class="disabled">
+    <option value="0" selected>Choose product</option>
+    @for (int n = 0; n < Model.ProductListing.Count; n++) 
+    {
+        <option for="@Model.ProductPost" value="@Model.ProductListing[n].Id">@Model.ProductListing[n].Name</option>
+    }
+        
+</select>*@
+
+
+    <br /><br />
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            @Html.TextBoxFor(model => Model.Nmbrperday, new { @class = "mdl-textfield__input" })
+            @Html.LabelFor(model => Model.Nmbrperday, "Amount per day (units)", new { @class = "mdl-textfield__label" })
+        </div>
+        <br />
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            @Html.TextBoxFor(model => Model.Costperday, new { @class = "mdl-textfield__input", @required = "required" })
+            @Html.LabelFor(model => Model.Costperday, "Cost per day (SEK)", new { @class = "mdl-textfield__label" })
+        </div>
+
+        <br />
+        @Html.HiddenFor(model => Model.UserId, new { Value = User.Identity.GetUserId() })
+
+
+        <div class="setup--substitute">
+            
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="@Html.IdFor(model => model.UsingSubstitute)">
+                @Html.CheckBoxFor(model => model.UsingSubstitute, new { @class = "mdl-checkbox__input" })
+                <span class="mdl-switch__label">
+                    I'm using nicotine-substitute
+                </span>
+            </label>
+
+            <div class="setup--substitute-input" id="test">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    @Html.TextBoxFor(model => Model.Substituteamount, new { @class = "mdl-textfield__input" })
+                    @Html.LabelFor(model => Model.Substituteamount, "Nicotine in each unit (in mg)", new { @class = "mdl-textfield__label" })
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <input type="submit" id="quit" value="QUIT" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="background:#e8997d; padding-left:40px; padding-right:40px;" disabled/>
+
+    }
+
+    <br />
+    <div style="font-size:12px;">You will be able to alter the type of Snus/Cigarettes you use soon. <br />Since you are such an early adopter you will have to change it in your user-settings once it's ready (we'll ping you on the counter-page).</div>
+
+    </div>
+
+
+<script>
+    $(function () {
+        $("input[type='radio']").change(function () {
+ 
+            $("input[type='submit']").removeAttr("disabled");
+        });
+    });
+
+    $(document).ready(function () {
+    $('#test').hide();//hide on load
+
+    $('#UsingSubstitute').click(function () {
+        $('#test').fadeToggle();
+    })
+    }); 
+
+</script>

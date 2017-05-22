@@ -1,22 +1,50 @@
 ﻿@using Microsoft.AspNet.Identity
+
+<div class="menuitem">
+    @Html.ActionLink(" ", "About", "Home")
+    <i class="material-icons" style="font-size:18px;">code</i>
+    <br />
+    <y>About Quitr</y>
+</div>
+
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+
+
+    <div class="menuitem">
+
+        @Html.ActionLink(" ", "Settings", "User")
+        <i class="material-icons" style="font-size:18px;">face</i>
+        <br />
+        <y>Account</y>
+    </div>
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"/*, @class = "navbar-right"*/ }))
     {
     @Html.AntiForgeryToken()
+        
+        <div class="menuitem">
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+            <a href="javascript:document.getElementById('logoutForm').submit()"> </a>
+            <i class="material-icons" style="font-size:18px;">lock_outline</i>
+            <br />
+            <y>Log out</y>
+        </div>
+        
     }
+
+    
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    
+        <div class="menuitem">
+            @Html.ActionLink(" ", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+            <i class="material-icons" style="font-size:18px;">lock_open</i>
+            <br />
+            <y>Log in</y>
+        </div>
+       
 }
+
+

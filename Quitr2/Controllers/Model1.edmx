@@ -1,0 +1,1192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ginoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="achivements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" />
+          <Property Name="description" Type="varchar" MaxLength="256" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="icon" Type="varchar" MaxLength="128" />
+          <Property Name="color" Type="varchar" MaxLength="64" />
+          <Property Name="type" Type="int" />
+        </EntityType>
+        <EntityType Name="addictiontypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="deviations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userprefid" Type="int" Nullable="false" />
+          <Property Name="deviation_start" Type="datetime" />
+          <Property Name="deviation_end" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="mood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TS" Type="datetime" Nullable="false" />
+          <Property Name="Mood" Type="int" Nullable="false" />
+          <Property Name="userprefid" Type="int" />
+        </EntityType>
+        <EntityType Name="productcontents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="Unit" Type="varchar" MaxLength="16" />
+          <Property Name="productcontenttypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="productcontenttype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producttype" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="128" />
+          <Property Name="deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="substitute">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userprefId" Type="int" Nullable="false" />
+          <Property Name="updated" Type="datetime" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+          <Property Name="unit" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="substitutestat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="substituteId" Type="int" Nullable="false" />
+          <Property Name="TS" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userachivements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userprefid" Type="int" Nullable="false" />
+          <Property Name="achivementid" Type="int" Nullable="false" />
+          <Property Name="TS" Type="datetime" Nullable="false" />
+          <Property Name="deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="userprefs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="stopDate" Type="datetime" />
+          <Property Name="addictiontype" Type="int" Nullable="false" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" />
+          <Property Name="cost" Type="int" />
+          <Property Name="units" Type="int" />
+          <Property Name="addictionproducttype" Type="int" />
+          <Property Name="deleteDate" Type="datetime" />
+          <Property Name="sharing" Type="bit" />
+          <Property Name="substituteUser" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'gino.dbo.nicotine_per_day' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="nicotine_per_day">
+          <Key>
+            <PropertyRef Name="userprefid" />
+          </Key>
+          <Property Name="userprefid" Type="int" Nullable="false" />
+          <Property Name="nic_per_day" Type="decimal" Precision="17" Scale="3" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'gino.dbo.substitute_nicotine_per_day' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="substitute_nicotine_per_day">
+          <Key>
+            <PropertyRef Name="userprefid" />
+          </Key>
+          <Property Name="userprefid" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="day" Type="int" />
+          <Property Name="substitute_sum" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'gino.dbo.substitute_nicotine_today' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="substitute_nicotine_today">
+          <Key>
+            <PropertyRef Name="userprefid" />
+            <PropertyRef Name="unit" />
+          </Key>
+          <Property Name="userprefid" Type="int" Nullable="false" />
+          <Property Name="today_amount" Type="int" />
+          <Property Name="unit" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__deviation__userp__398D8EEE">
+          <End Role="userprefs" Type="Self.userprefs" Multiplicity="1" />
+          <End Role="deviations" Type="Self.deviations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userprefs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="deviations">
+              <PropertyRef Name="userprefid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__mood__userprefid__6FE99F9F">
+          <End Role="userprefs" Type="Self.userprefs" Multiplicity="0..1" />
+          <End Role="mood" Type="Self.mood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userprefs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mood">
+              <PropertyRef Name="userprefid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productco__Produ__571DF1D5">
+          <End Role="products" Type="Self.products" Multiplicity="0..1" />
+          <End Role="productcontents" Type="Self.productcontents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="productcontents">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productco__produ__628FA481">
+          <End Role="productcontenttype" Type="Self.productcontenttype" Multiplicity="0..1" />
+          <End Role="productcontents" Type="Self.productcontents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productcontenttype">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="productcontents">
+              <PropertyRef Name="productcontenttypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__products__Produc__5165187F">
+          <End Role="addictiontypes" Type="Self.addictiontypes" Multiplicity="0..1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addictiontypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="Producttype" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__substitut__subst__5EBF139D">
+          <End Role="substitute" Type="Self.substitute" Multiplicity="1" />
+          <End Role="substitutestat" Type="Self.substitutestat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="substitute">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="substitutestat">
+              <PropertyRef Name="substituteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__substitut__userp__5FB337D6">
+          <End Role="userprefs" Type="Self.userprefs" Multiplicity="1" />
+          <End Role="substitute" Type="Self.substitute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userprefs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="substitute">
+              <PropertyRef Name="userprefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userachiv__achiv__75A278F5">
+          <End Role="achivements" Type="Self.achivements" Multiplicity="1" />
+          <End Role="userachivements" Type="Self.userachivements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="achivements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userachivements">
+              <PropertyRef Name="achivementid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userachiv__userp__74AE54BC">
+          <End Role="userprefs" Type="Self.userprefs" Multiplicity="1" />
+          <End Role="userachivements" Type="Self.userachivements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userprefs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userachivements">
+              <PropertyRef Name="userprefid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ginoModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="achivements" EntityType="Self.achivements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="addictiontypes" EntityType="Self.addictiontypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="deviations" EntityType="Self.deviations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mood" EntityType="Self.mood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productcontents" EntityType="Self.productcontents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productcontenttype" EntityType="Self.productcontenttype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="substitute" EntityType="Self.substitute" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="substitutestat" EntityType="Self.substitutestat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userachivements" EntityType="Self.userachivements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userprefs" EntityType="Self.userprefs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nicotine_per_day" EntityType="Self.nicotine_per_day" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [nicotine_per_day].[userprefid] AS [userprefid], 
+    [nicotine_per_day].[nic_per_day] AS [nic_per_day]
+    FROM [dbo].[nicotine_per_day] AS [nicotine_per_day]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="substitute_nicotine_per_day" EntityType="Self.substitute_nicotine_per_day" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [substitute_nicotine_per_day].[userprefid] AS [userprefid], 
+    [substitute_nicotine_per_day].[year] AS [year], 
+    [substitute_nicotine_per_day].[month] AS [month], 
+    [substitute_nicotine_per_day].[day] AS [day], 
+    [substitute_nicotine_per_day].[substitute_sum] AS [substitute_sum]
+    FROM [dbo].[substitute_nicotine_per_day] AS [substitute_nicotine_per_day]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="substitute_nicotine_today" EntityType="Self.substitute_nicotine_today" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [substitute_nicotine_today].[userprefid] AS [userprefid], 
+    [substitute_nicotine_today].[today_amount] AS [today_amount], 
+    [substitute_nicotine_today].[unit] AS [unit]
+    FROM [dbo].[substitute_nicotine_today] AS [substitute_nicotine_today]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__deviation__userp__398D8EEE" Association="Self.FK__deviation__userp__398D8EEE">
+            <End Role="userprefs" EntitySet="userprefs" />
+            <End Role="deviations" EntitySet="deviations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__mood__userprefid__6FE99F9F" Association="Self.FK__mood__userprefid__6FE99F9F">
+            <End Role="userprefs" EntitySet="userprefs" />
+            <End Role="mood" EntitySet="mood" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productco__Produ__571DF1D5" Association="Self.FK__productco__Produ__571DF1D5">
+            <End Role="products" EntitySet="products" />
+            <End Role="productcontents" EntitySet="productcontents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productco__produ__628FA481" Association="Self.FK__productco__produ__628FA481">
+            <End Role="productcontenttype" EntitySet="productcontenttype" />
+            <End Role="productcontents" EntitySet="productcontents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__products__Produc__5165187F" Association="Self.FK__products__Produc__5165187F">
+            <End Role="addictiontypes" EntitySet="addictiontypes" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__substitut__subst__5EBF139D" Association="Self.FK__substitut__subst__5EBF139D">
+            <End Role="substitute" EntitySet="substitute" />
+            <End Role="substitutestat" EntitySet="substitutestat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__substitut__userp__5FB337D6" Association="Self.FK__substitut__userp__5FB337D6">
+            <End Role="userprefs" EntitySet="userprefs" />
+            <End Role="substitute" EntitySet="substitute" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userachiv__achiv__75A278F5" Association="Self.FK__userachiv__achiv__75A278F5">
+            <End Role="achivements" EntitySet="achivements" />
+            <End Role="userachivements" EntitySet="userachivements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userachiv__userp__74AE54BC" Association="Self.FK__userachiv__userp__74AE54BC">
+            <End Role="userprefs" EntitySet="userprefs" />
+            <End Role="userachivements" EntitySet="userachivements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ginoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="addictiontype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="products" Relationship="Self.FK__products__Produc__5165187F" FromRole="addictiontypes" ToRole="products" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="deviation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userprefid" Type="Int32" Nullable="false" />
+          <Property Name="deviation_start" Type="DateTime" Precision="3" />
+          <Property Name="deviation_end" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="userpref" Relationship="Self.FK__deviation__userp__398D8EEE" FromRole="deviations" ToRole="userprefs" />
+        </EntityType>
+        <EntityType Name="mood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Mood1" Type="Int32" Nullable="false" />
+          <Property Name="userprefid" Type="Int32" />
+          <NavigationProperty Name="userpref" Relationship="Self.FK__mood__userprefid__6FE99F9F" FromRole="mood" ToRole="userprefs" />
+        </EntityType>
+        <EntityType Name="productcontent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="6" Scale="3" />
+          <Property Name="Unit" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="productcontenttypeId" Type="Int32" />
+          <NavigationProperty Name="product" Relationship="Self.FK__productco__Produ__571DF1D5" FromRole="productcontents" ToRole="products" />
+          <NavigationProperty Name="productcontenttype" Relationship="Self.FK__productco__produ__628FA481" FromRole="productcontents" ToRole="productcontenttype" />
+        </EntityType>
+        <EntityType Name="productcontenttype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="productcontents" Relationship="Self.FK__productco__produ__628FA481" FromRole="productcontenttype" ToRole="productcontents" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producttype" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="deleted" Type="Boolean" />
+          <NavigationProperty Name="addictiontype" Relationship="Self.FK__products__Produc__5165187F" FromRole="products" ToRole="addictiontypes" />
+          <NavigationProperty Name="productcontents" Relationship="Self.FK__productco__Produ__571DF1D5" FromRole="products" ToRole="productcontents" />
+        </EntityType>
+        <EntityType Name="substitute">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userprefId" Type="Int32" Nullable="false" />
+          <Property Name="updated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="deleted" Type="Boolean" />
+          <NavigationProperty Name="substitutestats" Relationship="Self.FK__substitut__subst__5EBF139D" FromRole="substitute" ToRole="substitutestat" />
+          <NavigationProperty Name="userpref" Relationship="Self.FK__substitut__userp__5FB337D6" FromRole="substitute" ToRole="userprefs" />
+        </EntityType>
+        <EntityType Name="substitutestat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="substituteId" Type="Int32" Nullable="false" />
+          <Property Name="TS" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="substitute" Relationship="Self.FK__substitut__subst__5EBF139D" FromRole="substitutestat" ToRole="substitute" />
+        </EntityType>
+        <EntityType Name="userpref">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="stopDate" Type="DateTime" Precision="3" />
+          <Property Name="addictiontype" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="cost" Type="Int32" />
+          <Property Name="units" Type="Int32" />
+          <Property Name="addictionproducttype" Type="Int32" />
+          <Property Name="deleteDate" Type="DateTime" Precision="3" />
+          <Property Name="sharing" Type="Boolean" />
+          <Property Name="substituteUser" Type="Boolean" />
+          <NavigationProperty Name="deviations" Relationship="Self.FK__deviation__userp__398D8EEE" FromRole="userprefs" ToRole="deviations" />
+          <NavigationProperty Name="moods" Relationship="Self.FK__mood__userprefid__6FE99F9F" FromRole="userprefs" ToRole="mood" />
+          <NavigationProperty Name="substitutes" Relationship="Self.FK__substitut__userp__5FB337D6" FromRole="userprefs" ToRole="substitute" />
+          <NavigationProperty Name="userachivements" Relationship="ginoModel.FK__userachiv__userp__74AE54BC" FromRole="userpref" ToRole="userachivement" />
+        </EntityType>
+        <EntityType Name="nicotine_per_day">
+          <Key>
+            <PropertyRef Name="userprefid" />
+          </Key>
+          <Property Name="userprefid" Type="Int32" Nullable="false" />
+          <Property Name="nic_per_day" Type="Decimal" Precision="17" Scale="3" />
+        </EntityType>
+        <EntityType Name="substitute_nicotine_per_day">
+          <Key>
+            <PropertyRef Name="userprefid" />
+          </Key>
+          <Property Name="userprefid" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="day" Type="Int32" />
+          <Property Name="substitute_sum" Type="Int32" />
+        </EntityType>
+        <EntityType Name="substitute_nicotine_today">
+          <Key>
+            <PropertyRef Name="userprefid" />
+            <PropertyRef Name="unit" />
+          </Key>
+          <Property Name="userprefid" Type="Int32" Nullable="false" />
+          <Property Name="today_amount" Type="Int32" />
+          <Property Name="unit" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK__products__Produc__5165187F">
+          <End Role="addictiontypes" Type="Self.addictiontype" Multiplicity="0..1" />
+          <End Role="products" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addictiontypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="Producttype" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__deviation__userp__398D8EEE">
+          <End Role="userprefs" Type="Self.userpref" Multiplicity="1" />
+          <End Role="deviations" Type="Self.deviation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userprefs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="deviations">
+              <PropertyRef Name="userprefid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__mood__userprefid__6FE99F9F">
+          <End Role="userprefs" Type="Self.userpref" Multiplicity="0..1" />
+          <End Role="mood" Type="Self.mood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userprefs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mood">
+              <PropertyRef Name="userprefid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productco__Produ__571DF1D5">
+          <End Role="products" Type="Self.product" Multiplicity="0..1" />
+          <End Role="productcontents" Type="Self.productcontent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="productcontents">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productco__produ__628FA481">
+          <End Role="productcontenttype" Type="Self.productcontenttype" Multiplicity="0..1" />
+          <End Role="productcontents" Type="Self.productcontent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productcontenttype">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="productcontents">
+              <PropertyRef Name="productcontenttypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__substitut__subst__5EBF139D">
+          <End Role="substitute" Type="Self.substitute" Multiplicity="1" />
+          <End Role="substitutestat" Type="Self.substitutestat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="substitute">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="substitutestat">
+              <PropertyRef Name="substituteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__substitut__userp__5FB337D6">
+          <End Role="userprefs" Type="Self.userpref" Multiplicity="1" />
+          <End Role="substitute" Type="Self.substitute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userprefs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="substitute">
+              <PropertyRef Name="userprefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ginoEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="addictiontypes" EntityType="Self.addictiontype" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="deviations" EntityType="Self.deviation" />
+          <EntitySet Name="moods" EntityType="Self.mood" />
+          <EntitySet Name="productcontents" EntityType="Self.productcontent" />
+          <EntitySet Name="productcontenttypes" EntityType="Self.productcontenttype" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="substitutes" EntityType="Self.substitute" />
+          <EntitySet Name="substitutestats" EntityType="Self.substitutestat" />
+          <EntitySet Name="userprefs" EntityType="Self.userpref" />
+          <EntitySet Name="nicotine_per_day" EntityType="Self.nicotine_per_day" />
+          <EntitySet Name="substitute_nicotine_per_day" EntityType="Self.substitute_nicotine_per_day" />
+          <EntitySet Name="substitute_nicotine_today" EntityType="Self.substitute_nicotine_today" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+          <AssociationSet Name="FK__products__Produc__5165187F" Association="Self.FK__products__Produc__5165187F">
+            <End Role="addictiontypes" EntitySet="addictiontypes" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__deviation__userp__398D8EEE" Association="Self.FK__deviation__userp__398D8EEE">
+            <End Role="userprefs" EntitySet="userprefs" />
+            <End Role="deviations" EntitySet="deviations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__mood__userprefid__6FE99F9F" Association="Self.FK__mood__userprefid__6FE99F9F">
+            <End Role="userprefs" EntitySet="userprefs" />
+            <End Role="mood" EntitySet="moods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productco__Produ__571DF1D5" Association="Self.FK__productco__Produ__571DF1D5">
+            <End Role="products" EntitySet="products" />
+            <End Role="productcontents" EntitySet="productcontents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productco__produ__628FA481" Association="Self.FK__productco__produ__628FA481">
+            <End Role="productcontenttype" EntitySet="productcontenttypes" />
+            <End Role="productcontents" EntitySet="productcontents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__substitut__subst__5EBF139D" Association="Self.FK__substitut__subst__5EBF139D">
+            <End Role="substitute" EntitySet="substitutes" />
+            <End Role="substitutestat" EntitySet="substitutestats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__substitut__userp__5FB337D6" Association="Self.FK__substitut__userp__5FB337D6">
+            <End Role="userprefs" EntitySet="userprefs" />
+            <End Role="substitute" EntitySet="substitutes" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="achivements" EntityType="ginoModel.achivement" />
+          <EntitySet Name="userachivements" EntityType="ginoModel.userachivement" />
+          <AssociationSet Name="FK__userachiv__achiv__75A278F5" Association="ginoModel.FK__userachiv__achiv__75A278F5">
+            <End Role="achivement" EntitySet="achivements" />
+            <End Role="userachivement" EntitySet="userachivements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userachiv__userp__74AE54BC" Association="ginoModel.FK__userachiv__userp__74AE54BC">
+            <End Role="userpref" EntitySet="userprefs" />
+            <End Role="userachivement" EntitySet="userachivements" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="achivement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="deleted" Type="Boolean" />
+          <NavigationProperty Name="userachivements" Relationship="ginoModel.FK__userachiv__achiv__75A278F5" FromRole="achivement" ToRole="userachivement" />
+          <Property Name="icon" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="Int32" />
+        </EntityType>
+        <EntityType Name="userachivement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userprefid" Type="Int32" Nullable="false" />
+          <Property Name="achivementid" Type="Int32" Nullable="false" />
+          <Property Name="TS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="deleted" Type="Boolean" />
+          <NavigationProperty Name="achivement" Relationship="ginoModel.FK__userachiv__achiv__75A278F5" FromRole="userachivement" ToRole="achivement" />
+          <NavigationProperty Name="userpref" Relationship="ginoModel.FK__userachiv__userp__74AE54BC" FromRole="userachivement" ToRole="userpref" />
+        </EntityType>
+        <Association Name="FK__userachiv__achiv__75A278F5">
+          <End Type="ginoModel.achivement" Role="achivement" Multiplicity="1" />
+          <End Type="ginoModel.userachivement" Role="userachivement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="achivement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userachivement">
+              <PropertyRef Name="achivementid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userachiv__userp__74AE54BC">
+          <End Type="ginoModel.userpref" Role="userpref" Multiplicity="1" />
+          <End Type="ginoModel.userachivement" Role="userachivement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userpref">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="userachivement">
+              <PropertyRef Name="userprefid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ginoModelStoreContainer" CdmEntityContainer="ginoEntities1">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="ginoModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="addictiontypes">
+            <EntityTypeMapping TypeName="ginoModel.addictiontype">
+              <MappingFragment StoreEntitySet="addictiontypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="ginoModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="ginoModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="ginoModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="ginoModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="deviations">
+            <EntityTypeMapping TypeName="ginoModel.deviation">
+              <MappingFragment StoreEntitySet="deviations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userprefid" ColumnName="userprefid" />
+                <ScalarProperty Name="deviation_start" ColumnName="deviation_start" />
+                <ScalarProperty Name="deviation_end" ColumnName="deviation_end" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="moods">
+            <EntityTypeMapping TypeName="ginoModel.mood">
+              <MappingFragment StoreEntitySet="mood">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TS" ColumnName="TS" />
+                <ScalarProperty Name="Mood1" ColumnName="Mood" />
+                <ScalarProperty Name="userprefid" ColumnName="userprefid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productcontents">
+            <EntityTypeMapping TypeName="ginoModel.productcontent">
+              <MappingFragment StoreEntitySet="productcontents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="productcontenttypeId" ColumnName="productcontenttypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productcontenttypes">
+            <EntityTypeMapping TypeName="ginoModel.productcontenttype">
+              <MappingFragment StoreEntitySet="productcontenttype">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="ginoModel.product">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Producttype" ColumnName="Producttype" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="substitutes">
+            <EntityTypeMapping TypeName="ginoModel.substitute">
+              <MappingFragment StoreEntitySet="substitute">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userprefId" ColumnName="userprefId" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="substitutestats">
+            <EntityTypeMapping TypeName="ginoModel.substitutestat">
+              <MappingFragment StoreEntitySet="substitutestat">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="substituteId" ColumnName="substituteId" />
+                <ScalarProperty Name="TS" ColumnName="TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userprefs">
+            <EntityTypeMapping TypeName="ginoModel.userpref">
+              <MappingFragment StoreEntitySet="userprefs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="stopDate" ColumnName="stopDate" />
+                <ScalarProperty Name="addictiontype" ColumnName="addictiontype" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="units" ColumnName="units" />
+                <ScalarProperty Name="addictionproducttype" ColumnName="addictionproducttype" />
+                <ScalarProperty Name="deleteDate" ColumnName="deleteDate" />
+                <ScalarProperty Name="sharing" ColumnName="sharing" />
+                <ScalarProperty Name="substituteUser" ColumnName="substituteUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nicotine_per_day">
+            <EntityTypeMapping TypeName="ginoModel.nicotine_per_day">
+              <MappingFragment StoreEntitySet="nicotine_per_day">
+                <ScalarProperty Name="userprefid" ColumnName="userprefid" />
+                <ScalarProperty Name="nic_per_day" ColumnName="nic_per_day" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="substitute_nicotine_per_day">
+            <EntityTypeMapping TypeName="ginoModel.substitute_nicotine_per_day">
+              <MappingFragment StoreEntitySet="substitute_nicotine_per_day">
+                <ScalarProperty Name="userprefid" ColumnName="userprefid" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="substitute_sum" ColumnName="substitute_sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="substitute_nicotine_today">
+            <EntityTypeMapping TypeName="ginoModel.substitute_nicotine_today">
+              <MappingFragment StoreEntitySet="substitute_nicotine_today">
+                <ScalarProperty Name="userprefid" ColumnName="userprefid" />
+                <ScalarProperty Name="today_amount" ColumnName="today_amount" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="ginoModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ginoModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="achivements">
+            <EntityTypeMapping TypeName="ginoModel.achivement">
+              <MappingFragment StoreEntitySet="achivements">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userachivements">
+            <EntityTypeMapping TypeName="ginoModel.userachivement">
+              <MappingFragment StoreEntitySet="userachivements">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="TS" ColumnName="TS" />
+                <ScalarProperty Name="achivementid" ColumnName="achivementid" />
+                <ScalarProperty Name="userprefid" ColumnName="userprefid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
