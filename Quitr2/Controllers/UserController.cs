@@ -31,7 +31,8 @@ namespace Quitr2.Controllers
                 {
                     var result = (from prefs in db.userprefs
                                   where prefs.Deleted == false && prefs.userId == user
-                                  select new { prefs.stopDate, prefs.cost, prefs.addictiontype, prefs.units, prefs.Id, prefs.Deleted, prefs.addictionproducttype, prefs.substituteUser }).FirstOrDefault();
+                                  select new { prefs.stopDate, prefs.cost, prefs.addictiontype,
+                                               prefs.units, prefs.Id, prefs.Deleted, prefs.addictionproducttype, prefs.substituteUser }).FirstOrDefault();
 
                     if (result == null)
                     {
@@ -66,9 +67,10 @@ namespace Quitr2.Controllers
                                              g.Unit
                                          });
 
+                    //DYNAMIC UNIT CALC
                     //foreach (var amount in ContentsQuery)
                     //{
-                    //   if(amount.Amount * totalUnits > 1000 && amount.Unit == "mg")
+                    //    if (amount.Amount * totalUnits > 1000 && amount.Unit == "mg")
                     //    {
                     //        amount.Unit = "g";
 
@@ -84,6 +86,25 @@ namespace Quitr2.Controllers
                                 Amount = x.Amount ?? 0,
                                 Unit = x.Unit,
                                 ContentName = x.Name
+                            }));
+
+                    //get achivements
+                    var achivementsresult = (from ua in db.userachivements
+                                             join a1 in db.achivements on ua.achivementid equals a1.level into a2
+                                             from a in a2.DefaultIfEmpty()
+                                             where ua.userprefid == result.Id && ua.deleted == false && a.type == ua.achivementtype
+                                             orderby a.level ascending
+                                             select new { a.icon, a.level, a.color, a.description });
+
+                    model.Achivements.AddRange(
+                        achivementsresult.ToList().Select(
+                            x =>
+                            new AchivementsModel()
+                            {
+                                icon = x.icon,
+                                color = x.color,
+                                description = x.description,
+                                level = x.level
                             }));
 
                     if (result.substituteUser == true)
@@ -131,24 +152,7 @@ namespace Quitr2.Controllers
                             model.substituteDayAmount = 0;
                         }
 
-                        //get achivements
-                        var achivementsresult = (from ua in db.userachivements
-                                                 join a1 in db.achivements on ua.achivementid equals a1.level into a2
-                                                 from a in a2.DefaultIfEmpty()
-                                                 where ua.userprefid == result.Id && ua.deleted == false && a.type == ua.achivementtype
-                                                 orderby a.level ascending
-                                                 select new { a.icon, a.level, a.color, a.description });
-
-                        model.Achivements.AddRange(
-                            achivementsresult.ToList().Select(
-                                x =>
-                                new AchivementsModel()
-                                {
-                                    icon = x.icon,
-                                    color = x.color,
-                                    description = x.description,
-                                    level = x.level
-                                }));
+                        
 
                         model.ProductContents.AddRange(
                        ContentsQuery.ToList().Select(

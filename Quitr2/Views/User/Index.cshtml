@@ -45,7 +45,6 @@ setInterval( function(){
     document.getElementById("minutes").innerHTML=pad(parseInt(sec/60%60));
     document.getElementById("hours").innerHTML=pad(parseInt(sec/3600%24));
     document.getElementById("days").innerHTML=pad(parseInt(sec/86400));
-    //document.getElementById("lifedays").innerHTML = pad(parseInt(sec * 0.00000131524));
 	document.getElementById("earnings").innerHTML=(((@Model.cost)/86400*sec).toFixed(0));
 
      @for (int n = 0; n < Model.ProductContents.Count; n++)
@@ -53,8 +52,8 @@ setInterval( function(){
          <text>document.getElementById("@Model.ProductContents[n].ContentName").innerHTML = ("@Model.ProductContents[n].ContentName" + ": " + ((@Model.ProductContents[n].Amount*@Model.units/86400)*sec).toFixed(2) + " @Model.ProductContents[n].Unit");</text>
         }
 
-      
-document.getElementById("unitsperday").innerHTML=(((@Model.units)/86400*sec).toFixed(0)+" " + "@Model.addictionTypeName");
+ 
+    document.getElementById("unitsperday").innerHTML=(((@Model.units)/86400*sec).toFixed(0)+" " + "@Model.addictionTypeName");
 
 
 }, 1000)
@@ -68,7 +67,6 @@ document.getElementById("unitsperday").innerHTML=(((@Model.units)/86400*sec).toF
         <div class="counter">
             <label id="days">0</label>&nbsp;days<br /><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label><br>
             <div class="lifelife" style="display:flex; justify-content:center;">
-                @*level <label id="lifedays">0</label>*@
 
                 @for (int n = 0; n < Model.Achivements.Count; n++)
                 {
@@ -98,19 +96,13 @@ document.getElementById("unitsperday").innerHTML=(((@Model.units)/86400*sec).toF
         <div class="mg">
             @for (int n = 0; n < Model.ProductContents.Count; n++)
             {
-                <label id="@Model.ProductContents[n].ContentName"></label><br />
-
+                <label style="display:block;" id="@Model.ProductContents[n].ContentName"></label>
             }
 
         </div>
     </div>
 
-    @if (Model.isUsingSubstitute)
-    {
-        <div class="substitutebox">
-            @Html.Partial("_SubstitutePartial", Model)
-        </div>
-    }
+  
 
     <div class="moodbox">
         @Html.Partial("_MoodPartial", Model)
@@ -122,6 +114,20 @@ document.getElementById("unitsperday").innerHTML=(((@Model.units)/86400*sec).toF
         <div class="mdl-snackbar__text"></div>
         <button class="mdl-snackbar__action" type="button"></button>
     </div>
+
+
+    @if (Model.isUsingSubstitute)
+    {
+        <div class="substitutebox">
+            @Html.Partial("_SubstitutePartial", Model)
+        </div>
+    }
+
+
+
+
+    @*document.getElementById("formid").reset();*@
+
 
     <script>
             (function () {
