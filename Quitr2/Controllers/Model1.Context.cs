@@ -45,5 +45,8 @@ namespace Quitr2.Controllers
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
         public virtual DbSet<achivement> achivements { get; set; }
         public virtual DbSet<userachivement> userachivements { get; set; }
+        public virtual DbSet<totalunit> totalunits { get; set; }
+        public virtual DbSet<totalsavings> totalsavings { get; set; }
+        public virtual DbSet<mood_per_day> mood_per_day { get; set; }
     }
 }

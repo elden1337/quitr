@@ -65,16 +65,16 @@ setInterval( function(){
 
     <div class="flexbox">
         <div class="counter">
-            <label id="days">0</label>&nbsp;days<br /><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label><br>
-            <div class="lifelife" style="display:flex; justify-content:center;">
+            <label id="days">0</label>&nbsp;days<br /><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label>@*<br>
+            <div class="lifelife" style="display:flex; justify-content:center;">*@
 
-                @for (int n = 0; n < Model.Achivements.Count; n++)
+                @*@for (int n = 0; n < Model.Achivements.Count; n++)
                 {
                 <div id="@Model.Achivements[n].level@Model.Achivements[n].icon " class="icon material-icons" style="font-size:36px; margin-top:-10px; color:@Model.Achivements[n].color;">@Model.Achivements[n].icon</div>
                 <div class="mdl-tooltip" for="@Model.Achivements[n].level@Model.Achivements[n].icon">
                 @Model.Achivements[n].description
                 </div>
-                }
+                }*@
 
                 @*<i class="material-icons">monetization_on</i>
         <i class="material-icons">brightness_1</i>
@@ -89,7 +89,7 @@ setInterval( function(){
         </div>
 
         <div class="earnings">
-            <label id="earnings"></label>&nbsp;kr<br>
+            <label id="earnings"></label>&nbsp;kr &nbsp;|&nbsp;
             <label id="unitsperday"></label>
         </div>
 

@@ -30,10 +30,23 @@ namespace Quitr2.Controllers
                               where p.Deleted == false
                               select new { p.Id }
                               ).Count();
+           
+                var unitssnus = (from u in db.totalunits
+                             where u.addictiontype == 1
+                             select new {u.units}).FirstOrDefault();
 
+                var unitscig = (from u in db.totalunits
+                                where u.addictiontype == 2
+                                select new { u.units }).FirstOrDefault();
+
+                var savings = (from s in db.totalsavings
+                               select new { s.savings }).FirstOrDefault();
 
                 model.totalCounters = result;
-
+                model.totalSnus =  unitssnus.units;
+                model.totalCig = unitscig.units;
+                model.savings = savings.savings;
+                
             };
 
             return View(model);

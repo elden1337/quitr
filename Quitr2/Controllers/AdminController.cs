@@ -11,14 +11,14 @@ namespace Quitr2.Controllers
 
     public class AdminController : Controller
     {
+
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult A6628f749b17c4e5b832c354e5b0ea22d()
         {
 
-            if (User.Identity.Name == "magnus.elden@outlook.com")
-            {
+            //if (User.Identity.Name == "magnus.elden@outlook.com")
+            //{
 
-                //FAKE, för tidsachivements
                 using (var db = new ginoEntities1())
                 {
                     var prefs = (from p in db.userprefs
@@ -88,13 +88,13 @@ namespace Quitr2.Controllers
                     }
 
                 }
-                //FAKE
+
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
         }
 
         [HttpPost]

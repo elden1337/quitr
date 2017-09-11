@@ -31,8 +31,17 @@ namespace Quitr2.Controllers
                 {
                     var result = (from prefs in db.userprefs
                                   where prefs.Deleted == false && prefs.userId == user
-                                  select new { prefs.stopDate, prefs.cost, prefs.addictiontype,
-                                               prefs.units, prefs.Id, prefs.Deleted, prefs.addictionproducttype, prefs.substituteUser }).FirstOrDefault();
+                                  select new
+                                  {
+                                      prefs.stopDate,
+                                      prefs.cost,
+                                      prefs.addictiontype,
+                                      prefs.units,
+                                      prefs.Id,
+                                      prefs.Deleted,
+                                      prefs.addictionproducttype,
+                                      prefs.substituteUser
+                                  }).FirstOrDefault();
 
                     if (result == null)
                     {
@@ -54,7 +63,7 @@ namespace Quitr2.Controllers
 
                     int daysConverted = Convert.ToInt32(days);
                     int totalUnits = daysConverted * result.units ?? 0;
-                    
+
                     var ContentsQuery = (from g in db.productcontents
                                          join p1 in db.productcontenttypes on g.productcontenttypeId equals p1.Id into p2
                                          from p in p2.DefaultIfEmpty()
@@ -131,7 +140,7 @@ namespace Quitr2.Controllers
 
                         if (substitute != null)
                         {
-                            var badamount = ((substitute.today_amount / 1000)/ nicPerDayQuery.nic_per_day);
+                            var badamount = (substitute.today_amount / nicPerDayQuery.nic_per_day);
 
                             if (badamount.Value > 0.3M)
                             { model.substituteMood = "#ecaa93"; }
@@ -152,7 +161,7 @@ namespace Quitr2.Controllers
                             model.substituteDayAmount = 0;
                         }
 
-                        
+
 
                         model.ProductContents.AddRange(
                        ContentsQuery.ToList().Select(
@@ -163,13 +172,8 @@ namespace Quitr2.Controllers
                                Unit = x.Unit,
                                ContentName = x.Name
                            }));
-
-
                     }
                 }
-
-                
-
             }
             return View(model);
         }
@@ -189,72 +193,62 @@ namespace Quitr2.Controllers
                 db.SaveChanges();
             };
 
-            //detta borde inte vara här
+            bool SubstituteResult;
+            int CounterId = 0;
+            GetCounterId(User.Identity.GetUserId(), out SubstituteResult, out CounterId);
 
-            using (var db = new ginoEntities1())
+            //HARDCODE, CHANGE LATER
+            if (SubstituteResult == true)
             {
 
-                var user = User.Identity.GetUserId();
-                if (user != null)
+                using (var db = new ginoEntities1())
                 {
-                    var result = (from prefs in db.userprefs
-                                  where prefs.Deleted == false && prefs.userId == user
-                                  select new { prefs.Id, prefs.substituteUser }).FirstOrDefault();
+                    model.isUsingSubstitute = true;
 
-                    if (result == null)
+                    var substituteIdQuery = (from s in db.substitutes
+                                             where s.deleted == false && s.userprefId == CounterId
+                                             orderby s.updated descending
+                                             select new { s.Id }).FirstOrDefault();
+
+                    model.substituteId = substituteIdQuery.Id;
+
+                    //get total nicotine per day
+                    var nicPerDayQuery = (from n in db.nicotine_per_day
+                                          where n.userprefid == CounterId
+                                          select new { n.nic_per_day }
+                                          ).FirstOrDefault();
+
+                    //get today's substitute-nicotine
+                    var substitute = (from s in db.substitute_nicotine_today
+                                      where s.userprefid == CounterId
+                                      select new { s.today_amount }).FirstOrDefault();
+
+                    if (substitute != null)
                     {
-                        //return RedirectToAction("Setup", "User");
-                    }
+                        var badamount = (substitute.today_amount / nicPerDayQuery.nic_per_day);
 
-                    //HARDCODE, CHANGE LATER
-                    if (result.substituteUser == true)
-                    {
-                        model.isUsingSubstitute = true;
-
-                        var substituteIdQuery = (from s in db.substitutes
-                                                 where s.deleted == false && s.userprefId == result.Id
-                                                 orderby s.updated descending
-                                                 select new { s.Id }).FirstOrDefault();
-
-                        model.substituteId = substituteIdQuery.Id;
-
-                        //get total nicotine per day
-                        var nicPerDayQuery = (from n in db.nicotine_per_day
-                                              where n.userprefid == result.Id
-                                              select new { n.nic_per_day }
-                                              ).FirstOrDefault();
-
-                        //get today's substitute-nicotine
-                        var substitute = (from s in db.substitute_nicotine_today
-                                          where s.userprefid == result.Id
-                                          select new { s.today_amount }).FirstOrDefault();
-
-                        if (substitute != null)
-                        {
-                            var badamount = (substitute.today_amount / nicPerDayQuery.nic_per_day);
-
-                            if (badamount.Value > 0.3M)
-                            { model.substituteMood = "#ecaa93"; }
-                            else if (badamount.Value > 0.2M)
-                            { model.substituteMood = "#f3c8b9"; }
-                            else if (badamount.Value > 0.05M)
-                            { model.substituteMood = "#faf5e5"; }
-                            else if (badamount.Value > 0.02M)
-                            { model.substituteMood = "#b9f3c8"; }
-                            else
-                            { model.substituteMood = "#93ecaa"; }
-                            model.substituteDayAmount = substitute.today_amount ?? 0;
-                        }
+                        if (badamount.Value > 0.3M)
+                        { model.substituteMood = "#ecaa93"; }
+                        else if (badamount.Value > 0.2M)
+                        { model.substituteMood = "#f3c8b9"; }
+                        else if (badamount.Value > 0.05M)
+                        { model.substituteMood = "#faf5e5"; }
+                        else if (badamount.Value > 0.02M)
+                        { model.substituteMood = "#b9f3c8"; }
                         else
-                        {
-                            model.substituteMood = "#93ecaa";
-                            model.substituteDayAmount = 0;
-                        }
-
-
+                        { model.substituteMood = "#93ecaa"; }
+                        model.substituteDayAmount = substitute.today_amount ?? 0;
                     }
+                    else
+                    {
+                        model.substituteMood = "#93ecaa";
+                        model.substituteDayAmount = 0;
+                    }
+
+
                 }
             }
+
 
             //DEtta borde inte vara här
 
@@ -298,38 +292,47 @@ namespace Quitr2.Controllers
                 dd.Mood1 = mood;
                 dd.TS = DateTime.UtcNow;
                 dd.userprefid = userprefid;
-                //dd.userprefid = model.userprefId;
                 db.SaveChanges();
             }
 
             ViewBag.Records = "Your mood has been stored. Keep it up!";
 
-            //detta borde inte vara här
-
-            using (var db = new ginoEntities1())
-            {
-
-                var user = User.Identity.GetUserId();
-                if (user != null)
-                {
-                    var result = (from prefs in db.userprefs
-                                  where prefs.Deleted == false && prefs.userId == user
-                                  select new { prefs.Id }).FirstOrDefault();
-
-                    if (result == null)
-                    {
-                        //return RedirectToAction("Setup", "User");
-                    }
-
-                    model.userprefId = result.Id;
-                }
-            }
-
-            //DEtta borde inte vara här
+            bool SubstituteResult;
+            int CounterId = 0;
+            GetCounterId(User.Identity.GetUserId(), out SubstituteResult, out CounterId);
+            model.userprefId = CounterId;
 
             return PartialView("_MoodPartial", model);
 
         }
+
+
+        public void GetCounterId(string user, out bool SubstituteResult, out int CounterId)
+        {
+            var db = new ginoEntities1();
+
+            if (user != null)
+            {
+                var result = (from prefs in db.userprefs
+                              where prefs.Deleted == false && prefs.userId == user
+                              select new { prefs.Id, prefs.substituteUser }).FirstOrDefault();
+
+                if (result == null)
+                {
+                    CounterId = 0;
+                    SubstituteResult = false;
+                }
+                CounterId = result.Id;
+                SubstituteResult = result.substituteUser ?? false;
+            }
+            else
+            {
+                CounterId = 0;
+                SubstituteResult = false;
+            }
+        }
+
+
 
         [HttpGet]
         public ActionResult Settings()
@@ -519,7 +522,7 @@ namespace Quitr2.Controllers
             using (var db = new ginoEntities1())
             {
                 userpref dd = new userpref();
-                 db.userprefs.Add(dd);
+                db.userprefs.Add(dd);
 
                 dd.addictiontype = model.AddictionType;
                 dd.cost = model.Costperday;
@@ -569,7 +572,7 @@ namespace Quitr2.Controllers
                 {
                     var moods = (from m in db.substitute_nicotine_per_day
                                  where m.userprefid == CounterId
-                                 select new { m.year, m.month, m.day, m.substitute_sum});
+                                 select new { m.year, m.month, m.day, m.substitute_sum });
                 }
             }
             else
@@ -635,10 +638,6 @@ namespace Quitr2.Controllers
                                 Unit = x.Unit,
                                 ContentName = x.Name
                             }));
-
-
-
-
 
                 }
             }

@@ -23,6 +23,9 @@ namespace Quitr2
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/cvcss").Include(
+                   "~/Content/cvsite.css"));
         }
     }
 }

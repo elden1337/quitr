@@ -37,6 +37,9 @@
         <EntityTypeShape EntityType="ginoModel.userachivement" Width="1.5" PointX="9.375" PointY="12.75" />
         <AssociationConnector Association="ginoModel.FK__userachiv__achiv__75A278F5" />
         <AssociationConnector Association="ginoModel.FK__userachiv__userp__74AE54BC" />
+        <EntityTypeShape EntityType="ginoModel.totalunit" Width="1.5" PointX="12.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ginoModel.totalsavings" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="ginoModel.mood_per_day" Width="1.5" PointX="3.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

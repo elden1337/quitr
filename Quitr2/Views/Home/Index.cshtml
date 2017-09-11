@@ -4,13 +4,6 @@
     ViewBag.Title = "Quitr";
 }
 
-@*<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-8788494757785541",
-    enable_page_level_ads: true
-  });
-</script>*@
 
 <div class="placeholder">
 
@@ -23,36 +16,48 @@
                 <t style="color:#e8997d; font-size:105px; z-index:-1; margin-right:-8px; padding-top:2px;">Q</t>uitr.net
             </div>
   <br />
-            <div class="frontpage-logo-byline">Currently helping @Model.totalCounters persons quit their habits!</div>
+            <div class="frontpage-logo-byline">Currently helping @Model.totalCounters persons quit their bad habits!</div>
         
         </center>
         <br />
 
-        <hr />
-
+        @*<hr />*@
+    
         <div class="article">
             <p>
-                <b>2017-05-06</b><br />
-                Like-button added to the shared pages to gather feedback from people who view your quitr.<br />
-                Minor bug-fixes with setup.
+                <b>Welcome!</b><br /><br />
+                Quitr.net is a free micro-service aimed at those who like to get rid of an addiction. The personal counter currently supports snus (swedish dip) and cigarettes, including facebook sharing and feedback.
+                <br>
+                Quitr.net is being developed as a hobby-project, and was concieved by Magnus Eldén to game himself out of his nicotine addiction.<br>
+            <br />Our small but constantly growing community have so far saved up on:<br />
+
+
             </p>
+            <div class="startflexbox">
+                <div class="startflex">
+                    @Model.totalSnus snus portions<br />
+                    not taken
+                </div>
+                <div class="startflex">
+                    @Model.totalCig cigarettes<br />
+                    not smoked
+                </div>
+                <div class="startflex">
+                    @Model.savings.ToString("# ##0") SEK<br />
+                    Saved
+                </div>
+            </div>
+            <br />
             <p>
-                <b>2017-05-04</b><br />
-                The nicotine-substitute setting has been released. It can currently be used to store your substitute-intake each day. We'll use the stored data to produce graphs for you in the coming weeks.<br />
-            </p>
-         
+                <center style="font-size:16px;">
+                    Are you also ready to quit?<br /> @Html.ActionLink("Let's start >>", "Login", "Account")
+                </center>    
+    </p>
+            <div class="frontpage-hashtags">#quitr #beaquitr</div>
         </div>
-
-
-
-        <div class="frontpage-hashtags">#quitr #beaquitr</div>
-
-
-        @*@Html.RenderPartial(MVC.Account.Views.Login)
-        @Html.RenderPartial()*@
-
-
         
+
+
 
     </div>
 

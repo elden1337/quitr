@@ -1,7 +1,6 @@
 ﻿@model Quitr2.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
 
-<h4>Log in with an external account</h4>
 
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
@@ -19,6 +18,9 @@
                         <button type="submit" @*class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"*@ id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@*@p.AuthenticationType*@</button>
                     }
                 </p>
+                <br />
+                <h4>Or sign in with a local account</h4>
+                <br /><br />
             </div>
         }
     }

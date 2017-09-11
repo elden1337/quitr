@@ -112,7 +112,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" />
-          <Property Name="Amount" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="Amount" Type="decimal" Precision="9" Scale="6" />
           <Property Name="Unit" Type="varchar" MaxLength="16" />
           <Property Name="productcontenttypeId" Type="int" />
         </EntityType>
@@ -179,13 +179,28 @@
           <Property Name="substituteUser" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'gino.dbo.mood_per_day' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="mood_per_day">
+          <Key>
+            <PropertyRef Name="userprefid" />
+          </Key>
+          <Property Name="userprefid" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="day" Type="int" />
+          <Property Name="moods_count" Type="int" />
+          <Property Name="avg_mood" Type="float" />
+          <Property Name="max_mood" Type="int" />
+          <Property Name="min_mood" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'gino.dbo.nicotine_per_day' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="nicotine_per_day">
           <Key>
             <PropertyRef Name="userprefid" />
           </Key>
           <Property Name="userprefid" Type="int" Nullable="false" />
-          <Property Name="nic_per_day" Type="decimal" Precision="17" Scale="3" />
+          <Property Name="nic_per_day" Type="decimal" Precision="25" Scale="6" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'gino.dbo.substitute_nicotine_per_day' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -209,6 +224,23 @@ warning 6002: The table/view 'gino.dbo.substitute_nicotine_today' does not have 
           <Property Name="userprefid" Type="int" Nullable="false" />
           <Property Name="today_amount" Type="int" />
           <Property Name="unit" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'gino.dbo.totalsavings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="totalsavings">
+          <Key>
+            <PropertyRef Name="savings" />
+          </Key>
+          <Property Name="savings" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'gino.dbo.totalunits' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="totalunits">
+          <Key>
+            <PropertyRef Name="addictiontype" />
+          </Key>
+          <Property Name="addictiontype" Type="int" Nullable="false" />
+          <Property Name="units" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -410,6 +442,18 @@ warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a 
           <EntitySet Name="substitutestat" EntityType="Self.substitutestat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userachivements" EntityType="Self.userachivements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userprefs" EntityType="Self.userprefs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mood_per_day" EntityType="Self.mood_per_day" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [mood_per_day].[userprefid] AS [userprefid], 
+    [mood_per_day].[year] AS [year], 
+    [mood_per_day].[month] AS [month], 
+    [mood_per_day].[day] AS [day], 
+    [mood_per_day].[moods_count] AS [moods_count], 
+    [mood_per_day].[avg_mood] AS [avg_mood], 
+    [mood_per_day].[max_mood] AS [max_mood], 
+    [mood_per_day].[min_mood] AS [min_mood]
+    FROM [dbo].[mood_per_day] AS [mood_per_day]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="nicotine_per_day" EntityType="Self.nicotine_per_day" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [nicotine_per_day].[userprefid] AS [userprefid], 
@@ -431,6 +475,17 @@ warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a 
     [substitute_nicotine_today].[today_amount] AS [today_amount], 
     [substitute_nicotine_today].[unit] AS [unit]
     FROM [dbo].[substitute_nicotine_today] AS [substitute_nicotine_today]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="totalsavings" EntityType="Self.totalsavings" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [totalsavings].[savings] AS [savings]
+    FROM [dbo].[totalsavings] AS [totalsavings]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="totalunits" EntityType="Self.totalunits" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [totalunits].[addictiontype] AS [addictiontype], 
+    [totalunits].[units] AS [units]
+    FROM [dbo].[totalunits] AS [totalunits]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
             <DefiningQuery>SELECT 
@@ -594,7 +649,7 @@ warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a 
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" />
-          <Property Name="Amount" Type="Decimal" Precision="6" Scale="3" />
+          <Property Name="Amount" Type="Decimal" Precision="9" Scale="6" />
           <Property Name="Unit" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="productcontenttypeId" Type="Int32" />
           <NavigationProperty Name="product" Relationship="Self.FK__productco__Produ__571DF1D5" FromRole="productcontents" ToRole="products" />
@@ -666,7 +721,7 @@ warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a 
             <PropertyRef Name="userprefid" />
           </Key>
           <Property Name="userprefid" Type="Int32" Nullable="false" />
-          <Property Name="nic_per_day" Type="Decimal" Precision="17" Scale="3" />
+          <Property Name="nic_per_day" Type="Decimal" Precision="25" Scale="6" />
         </EntityType>
         <EntityType Name="substitute_nicotine_per_day">
           <Key>
@@ -888,6 +943,9 @@ warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a 
             <End Role="userpref" EntitySet="userprefs" />
             <End Role="userachivement" EntitySet="userachivements" />
           </AssociationSet>
+          <EntitySet Name="totalunits" EntityType="ginoModel.totalunit" />
+          <EntitySet Name="totalsavings" EntityType="ginoModel.totalsavings" />
+          <EntitySet Name="mood_per_day" EntityType="ginoModel.mood_per_day" />
         </EntityContainer>
         <EntityType Name="achivement">
           <Key>
@@ -940,6 +998,32 @@ warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="totalunit">
+          <Key>
+            <PropertyRef Name="addictiontype" />
+          </Key>
+          <Property Name="addictiontype" Type="Int32" Nullable="false" />
+          <Property Name="units" Type="Int32" />
+        </EntityType>
+        <EntityType Name="totalsavings">
+          <Key>
+            <PropertyRef Name="savings" />
+          </Key>
+          <Property Name="savings" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mood_per_day">
+          <Key>
+            <PropertyRef Name="userprefid" />
+          </Key>
+          <Property Name="userprefid" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="day" Type="Int32" />
+          <Property Name="moods_count" Type="Int32" />
+          <Property Name="avg_mood" Type="Double" />
+          <Property Name="max_mood" Type="Int32" />
+          <Property Name="min_mood" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1172,6 +1256,35 @@ warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="totalunits">
+            <EntityTypeMapping TypeName="ginoModel.totalunit">
+              <MappingFragment StoreEntitySet="totalunits">
+                <ScalarProperty Name="units" ColumnName="units" />
+                <ScalarProperty Name="addictiontype" ColumnName="addictiontype" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="totalsavings">
+            <EntityTypeMapping TypeName="ginoModel.totalsavings">
+              <MappingFragment StoreEntitySet="totalsavings">
+                <ScalarProperty Name="savings" ColumnName="savings" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mood_per_day">
+            <EntityTypeMapping TypeName="ginoModel.mood_per_day">
+              <MappingFragment StoreEntitySet="mood_per_day">
+                <ScalarProperty Name="min_mood" ColumnName="min_mood" />
+                <ScalarProperty Name="max_mood" ColumnName="max_mood" />
+                <ScalarProperty Name="avg_mood" ColumnName="avg_mood" />
+                <ScalarProperty Name="moods_count" ColumnName="moods_count" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="userprefid" ColumnName="userprefid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1186,7 +1299,7 @@ warning 6002: The table/view 'gino.sys.database_firewall_rules' does not have a 
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
