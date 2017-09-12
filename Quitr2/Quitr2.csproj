@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -208,7 +209,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\AspNetRole.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -227,6 +227,7 @@
     <Compile Include="Controllers\database_firewall_rules.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\deviation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
