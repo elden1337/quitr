@@ -76,16 +76,6 @@ namespace Quitr2.Controllers
                                              g.Unit
                                          });
 
-                    //DYNAMIC UNIT CALC
-                    //foreach (var amount in ContentsQuery)
-                    //{
-                    //    if (amount.Amount * totalUnits > 1000 && amount.Unit == "mg")
-                    //    {
-                    //        amount.Unit = "g";
-
-                    //    }
-
-                    //}
 
                     model.ProductContents.AddRange(
                         ContentsQuery.ToList().Select(
