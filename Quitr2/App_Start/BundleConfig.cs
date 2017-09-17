@@ -21,7 +21,7 @@ namespace Quitr2
                     "~/Scripts/jquery.validate.unobtrusive.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/site.min.css"));
+                      "~/Content/site.css"));
 
         }
     }

@@ -102,7 +102,52 @@ setInterval( function(){
         </div>
     </div>
 
-  
+@if(User.Identity.Name == "magnus.elden@outlook.com")
+{
+<div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+    <canvas id="myChart" width="400" height="100"></canvas>
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["April", "May", "June", "July", "August", "September"],
+                datasets: [{
+                    //label: 'mood',
+                    data: [0.83, 0.41, 1, 1.25, 1.18, 0.88],
+                    backgroundColor: [
+                        'rgba(232, 153, 125, 0.0)'
+                    ],
+                    borderColor: [
+                        'rgba(232,153,125,1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            max: 2,
+                            min: -2,
+                            stepSize: 1
+                        }
+                    }],
+                    xAxes: [{
+                        time: {
+                            unit: 'month'
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                }
+            } 
+        });
+    </script>
+</div>
+}
 
     <div class="moodbox">
         @Html.Partial("_MoodPartial", Model)

@@ -583,8 +583,19 @@ a:hover {text-decoration:underline;}
     }
 
     .mg, .counter, .earnings, .moodbox {
-padding:11px;
-margin-bottom:11px;
+        padding: 11px;
+        margin-bottom: 11px;
+        font-size: 17px !important;
+    }
+
+    .mg {
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-gap: 5px;
+        -webkit-column-gap: 5px;
+        -moz-column-gap: 5px;
+        font-size: 17px !important;
     }
 
     .title {
@@ -621,6 +632,7 @@ margin-bottom:11px;
 
     .mg, .counter, .earnings, .moodbox {
         width:98%;
+        font-size:17px !important;
     }
 
     .mdl-button--fab {
