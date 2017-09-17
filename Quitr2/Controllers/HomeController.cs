@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Quitr2.Models.Home;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
+using Quitr2.ApiClasses;
 
 namespace Quitr2.Controllers
 {
@@ -15,6 +16,7 @@ namespace Quitr2.Controllers
 
         
         [HttpGet]
+        [cacheFilter(TimeDuration = 7200)]
         public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)

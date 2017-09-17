@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Quitr2.Models.User;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
+using Quitr2.ApiClasses;
 
 namespace Quitr2.Controllers
 {
@@ -14,6 +15,7 @@ namespace Quitr2.Controllers
     {
 
         [HttpGet]
+        [cacheFilter(TimeDuration = 1000)]
         public ActionResult Index()
         {
             if (!User.Identity.IsAuthenticated)
@@ -325,6 +327,7 @@ namespace Quitr2.Controllers
 
 
         [HttpGet]
+        [cacheFilter(TimeDuration = 3600)]
         public ActionResult Settings()
         {
             if (!User.Identity.IsAuthenticated)
@@ -450,6 +453,7 @@ namespace Quitr2.Controllers
         }
 
         [HttpGet]
+        [cacheFilter(TimeDuration = 7200)]
         public ActionResult Setup()
         {
             if (!User.Identity.IsAuthenticated)
@@ -573,7 +577,7 @@ namespace Quitr2.Controllers
         }
 
 
-
+        [cacheFilter(TimeDuration = 1000)]
         public ActionResult Share(string UserId)
         {
 
