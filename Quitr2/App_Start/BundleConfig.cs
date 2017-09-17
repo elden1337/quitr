@@ -16,9 +16,9 @@ namespace Quitr2
 
             
             bundles.Add(new ScriptBundle("~/bundles/miscjs").Include(
-                    "~/Scripts/jquery.unobtrusive-ajax.js",
-                    "~/Scripts/material.min.js",
-                    "~/Scripts/jquery.validate.unobtrusive.js"));
+                    //"~/Scripts/jquery.unobtrusive-ajax.js",
+                    "~/Scripts/material.min.js"/*,*/
+/*                    "~/Scripts/jquery.validate.unobtrusive.js"*/));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css"));
