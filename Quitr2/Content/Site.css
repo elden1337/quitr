@@ -172,6 +172,9 @@ padding-bottom:5px;
 .mg {
     color: #e8997d;
     line-height: 150%;
+    -webkit-column-count:1;
+    -moz-column-count:1;
+    column-count:1;
 }
 
 .counter {
@@ -595,7 +598,7 @@ a:hover {text-decoration:underline;}
         column-gap: 5px;
         -webkit-column-gap: 5px;
         -moz-column-gap: 5px;
-        font-size: 17px !important;
+        font-size: 18px !important;
     }
 
     .title {

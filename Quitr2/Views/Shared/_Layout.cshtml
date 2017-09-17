@@ -11,9 +11,8 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" defer/>
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-teal.min.css" defer/>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js" defer></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js" defer></script>
-
+    
+   
 
 <link rel="apple-touch-icon-precomposed" sizes="57x57" href="~/Content/img/favicon/" />
 <link rel="apple-touch-icon-precomposed" sizes="57x57" href="~/Content/img/favicon/apple-touch-icon-57x57.png" />
@@ -48,9 +47,12 @@
         });
     </script>*@
 
-    @Scripts.RenderFormat(@"<script src="" {0}"" async></script>", "~/bundles/jquery")
-    @Scripts.RenderFormat(@"<script src="" {0}"" async></script>", "~/bundles/jqueryval")
-    @Scripts.RenderFormat(@"<script src="" {0}"" async></script>", "~/bundles/miscjs")
+    @Scripts.RenderFormat(@"<script src="" {0}"" defer></script>", "~/bundles/jquery")
+    @Scripts.RenderFormat(@"<script src="" {0}"" defer></script>", "~/bundles/jqueryval")
+    @Scripts.RenderFormat(@"<script src="" {0}"" defer></script>", "~/bundles/miscjs")
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js" defer></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js" defer></script>
 
     <script>
          window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
