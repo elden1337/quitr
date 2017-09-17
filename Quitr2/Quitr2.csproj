@@ -328,6 +328,7 @@
     <Content Include="Content\img\favicon\mstile-310x310.png" />
     <Content Include="Content\img\favicon\mstile-70x70.png" />
     <Content Include="Content\img\icons\signin-facebook.png" />
+    <Content Include="Content\Site.min.css" />
     <Content Include="Controllers\Gino.edmx.sql" />
     <Content Include="Controllers\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
