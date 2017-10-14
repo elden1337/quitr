@@ -90,23 +90,23 @@ namespace Quitr2.Controllers
                             }));
 
                     //get achivements
-                    var achivementsresult = (from ua in db.userachivements
-                                             join a1 in db.achivements on ua.achivementid equals a1.level into a2
-                                             from a in a2.DefaultIfEmpty()
-                                             where ua.userprefid == result.Id && ua.deleted == false && a.type == ua.achivementtype
-                                             orderby a.level ascending
-                                             select new { a.icon, a.level, a.color, a.description });
+                    //var achivementsresult = (from ua in db.userachivements
+                    //                         join a1 in db.achivements on ua.achivementid equals a1.level into a2
+                    //                         from a in a2.DefaultIfEmpty()
+                    //                         where ua.userprefid == result.Id && ua.deleted == false && a.type == ua.achivementtype
+                    //                         orderby a.level ascending
+                    //                         select new { a.icon, a.level, a.color, a.description });
 
-                    model.Achivements.AddRange(
-                        achivementsresult.ToList().Select(
-                            x =>
-                            new AchivementsModel()
-                            {
-                                icon = x.icon,
-                                color = x.color,
-                                description = x.description,
-                                level = x.level
-                            }));
+                    //model.Achivements.AddRange(
+                    //    achivementsresult.ToList().Select(
+                    //        x =>
+                    //        new AchivementsModel()
+                    //        {
+                    //            icon = x.icon,
+                    //            color = x.color,
+                    //            description = x.description,
+                    //            level = x.level
+                    //        }));
 
                     if (result.substituteUser == true)
                     {
